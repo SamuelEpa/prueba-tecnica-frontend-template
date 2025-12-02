@@ -1,94 +1,88 @@
-# Prueba Técnica Frontend - Excalibur
+# Desafío Técnico: Refactorización de Dashboard de Ventas
 
-Proyecto básico de Next.js con TypeScript y React para prueba técnica.
+## Contexto del Proyecto
 
-## 🚀 Tecnologías utilizadas
+Bienvenido al equipo de **Accident Action Network**. Hemos heredado un módulo crítico: el dashboard de "ventas en tiempo real". Este componente fue desarrollado inicialmente como un prototipo rápido (MVP), pero ahora enfrenta problemas serios de deuda técnica.
 
-- **Next.js 16** - Framework de React con App Router
-- **React 19** - Biblioteca de interfaz de usuario
-- **TypeScript** - Superset de JavaScript con tipado estático
-- **Tailwind CSS** - Framework de CSS utilitario
-- **ESLint** - Linter para mantener calidad de código
+El código actual es funcional, pero presenta dificultades de mantenimiento, problemas de rendimiento perceptibles y una arquitectura que limita la escalabilidad futura.
 
-## 📦 Instalación
+**Tu objetivo:** Realizar una refactorización integral para transformar este módulo en una pieza de software mantenible, escalable y de alto rendimiento, preservando la lógica de negocio existente.
 
-1. Clona el repositorio:
+## Lineamientos de Desarrollo
+
+Para asegurar la calidad del entregable y facilitar la revisión de código por parte del equipo, debes adherirte a los siguientes estándares:
+
+- **Criterio Técnico y Justificación:** Más allá de que el código funcione, evaluaremos la calidad de tus decisiones arquitectónicas. Buscamos soluciones robustas y bien fundamentadas.
+
+- **Historia de Git (Commits):** El historial de versiones es parte de la entrega. Debes realizar commits atómicos y semánticos que narren la evolución de tu refactorización (ej: `refactor: desacoplar lógica de filtrado`, `fix: optimizar renderizado de lista`). Evita un único commit masivo ("mega-commit").
+
+- **Tiempo Estimado:** Tienes un plazo máximo de **72 horas** para enviar tu solución. El ejercicio está dimensionado para ser completado en aproximadamente **3-4 horas** de trabajo enfocado.
+
+## Tareas a Realizar
+
+### 1. Refactorización e Ingeniería (Código)
+
+El archivo `components/LegacyDashboard.tsx` requiere una intervención mayor:
+
+- **Modularización:** Descompón el componente monolítico en sub-componentes reutilizables y con responsabilidad única.
+
+- **Gestión de Estado:** Optimiza el manejo del estado y el flujo de datos. Evalúa si la estructura actual es la más eficiente.
+
+- **Seguridad de Tipos:** El proyecto utiliza TypeScript, pero el código actual abusa del tipo `any`. Implementa interfaces y tipos estrictos para garantizar la robustez.
+
+- **Optimización de Rendimiento:** Se han reportado bloqueos en la interfaz al filtrar grandes volúmenes de datos. Diagnostica y soluciona los problemas de performance en el filtrado y ordenamiento.
+
+- **Arquitectura Next.js:** Aprovecha las capacidades del framework. Mueve la lógica que corresponda al servidor (Server Components) y mantén en el cliente solo lo estrictamente necesario.
+
+### 2. Análisis Técnico (Responde en un archivo ANSWERS.md)
+
+#### Pregunta A: Sincronización de Estado entre Pestañas
+
+El equipo de producto requiere una nueva funcionalidad: si un usuario tiene el dashboard abierto en dos pestañas del navegador y actualiza un filtro en una, la otra pestaña debe reflejar este cambio automáticamente sin recargar la página.
+
+- ¿Qué enfoque técnico propondrías para implementar esto?
+- ¿Qué implicaciones tiene tu solución a nivel de cliente y servidor?
+- Compara brevemente dos estrategias posibles y justifica tu elección final (Costo vs. Beneficio).
+
+#### Pregunta B: Comportamiento del Ciclo de Vida
+
+Durante las pruebas en el entorno de desarrollo, se observó que el `useEffect` encargado de la carga inicial de datos se ejecuta dos veces consecutivas. Se ha sugerido utilizar un `useRef` para bloquear la segunda ejecución y evitar "peticiones duplicadas".
+
+- ¿Implementarías esta solución en el código? Justifica tu respuesta técnica.
+- ¿Qué nos indica este comportamiento sobre el entorno de ejecución de React moderno?
+
+## Proceso de Entrega
+
+1. Realiza un **Fork** de este repositorio.
+2. Implementa tus mejoras y respuestas.
+3. Genera un **Pull Request (PR)** hacia el repositorio original.
+4. En la descripción del PR, incluye un breve resumen de las decisiones técnicas más complejas que tomaste durante el ejercicio.
+
+## Tecnologías del Proyecto
+
+- **Framework:** Next.js 15
+- **Lenguaje:** TypeScript
+- **Estilos:** Tailwind CSS
+- **Linting:** ESLint
+
+## Instalación y Desarrollo
+
 ```bash
-git clone <url-del-repositorio>
-cd pruebatecnica-frontend-excalibur
-```
-
-2. Instala las dependencias:
-```bash
+# Instalar dependencias
 npm install
-```
 
-3. Ejecuta el servidor de desarrollo:
-```bash
+# Ejecutar en modo desarrollo
 npm run dev
-```
 
-4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
-
-## 🏗️ Estructura del proyecto
-
-```
-src/
-├── app/                    # App Router de Next.js
-│   ├── about/             # Página "Acerca de"
-│   ├── layout.tsx         # Layout principal
-│   └── page.tsx           # Página de inicio
-├── components/            # Componentes reutilizables
-│   └── Welcome.tsx        # Componente de bienvenida
-├── lib/                   # Utilidades y configuración
-│   └── utils.ts           # Funciones de utilidad
-└── types/                 # Definiciones de tipos TypeScript
-    └── index.ts           # Tipos principales
-```
-
-## 🎯 Características implementadas
-
-- ✅ Configuración completa de TypeScript
-- ✅ Componentes React con tipado fuerte
-- ✅ Utilidades y tipos comunes
-- ✅ Diseño responsivo con Tailwind CSS
-- ✅ Soporte para modo oscuro
-- ✅ Estructura de proyecto organizada
-- ✅ Routing con App Router de Next.js
-
-## 🛠️ Scripts disponibles
-
-```bash
-npm run dev      # Ejecuta el servidor de desarrollo
-npm run build    # Construye la aplicación para producción
-npm start        # Ejecuta la aplicación en modo producción
-npm run lint     # Ejecuta ESLint para revisar el código
-```
-
-## 📝 Desarrollo
-
-Para agregar nuevas funcionalidades:
-
-1. Crea componentes en `src/components/`
-2. Define tipos en `src/types/`
-3. Agrega utilidades en `src/lib/`
-4. Crea nuevas páginas en `src/app/`
-
-## 🔧 Configuración
-
-El proyecto incluye configuración para:
-
-- TypeScript (`tsconfig.json`)
-- Tailwind CSS (`postcss.config.mjs`, `tailwind.config.ts`)
-- ESLint (`eslint.config.mjs`)
-- Next.js (`next.config.ts`)
-
-## 📱 Despliegue
-
-Para desplegar en Vercel:
-
-```bash
+# Construir para producción
 npm run build
+
+# Ejecutar linter
+npm run lint
 ```
 
-El proyecto está listo para desplegarse en cualquier plataforma que soporte Next.js.
+El proyecto estará disponible en [http://localhost:3000](http://localhost:3000).
+
+---
+
+*Este desafío está diseñado para evaluar tus habilidades técnicas en refactorización, arquitectura de software y toma de decisiones en un contexto real de desarrollo.*
