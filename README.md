@@ -22,7 +22,7 @@ Para asegurar la calidad del entregable y facilitar la revisión de código por 
 
 ### 1. Refactorización e Ingeniería (Código)
 
-El archivo `components/LegacyDashboard.tsx` requiere una intervención mayor:
+El archivo `src/app/page.tsx` requiere una intervención mayor:
 
 - **Modularización:** Descompón el componente monolítico en sub-componentes reutilizables y con responsabilidad única.
 
