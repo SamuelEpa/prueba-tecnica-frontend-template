@@ -1,6 +1,6 @@
 "use client";
 import { Product, Stats } from "@/types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 type Props = {
   initialItems: Product[];
@@ -22,6 +22,9 @@ const DashboardClient = ({
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<Stats>(initialStats);
 
+
+  const locale = "es-ES";
+  const formatter = useMemo(() => new Intl.NumberFormat(locale), [locale]);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -101,7 +104,7 @@ const DashboardClient = ({
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
             <p className="text-sm text-gray-600 dark:text-gray-400">Valor Total</p>
             <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
-              ${stats.totalValue?.toLocaleString()}
+              ${formatter.format(stats.totalValue ?? 0)}
             </p>
           </div>
         </div>
@@ -139,7 +142,7 @@ const DashboardClient = ({
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-500 dark:text-gray-400">Precio:</span>
                     <span className="text-xl font-bold text-emerald-600 dark:text-emerald-400">
-                      ${item.price.toLocaleString()}
+                      ${formatter.format(item.price)}
                     </span>
                   </div>
                 </div>
